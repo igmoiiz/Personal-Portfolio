@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class OsContainer extends StatefulWidget {
@@ -7,7 +5,7 @@ class OsContainer extends StatefulWidget {
   final double width;
   final Widget icon;
   final String title;
-  final String backText; // New field for back text
+  final String backText; // Added backText for the flipped side
 
   const OsContainer({
     super.key,
@@ -15,116 +13,125 @@ class OsContainer extends StatefulWidget {
     required this.width,
     required this.icon,
     required this.title,
-    required this.backText, // Pass back text
+    required this.backText, // Required parameter for back text
   });
 
   @override
-  State<OsContainer> createState() => _OsContainerState();
+  _OsContainerState createState() => _OsContainerState();
 }
 
 class _OsContainerState extends State<OsContainer>
-    with TickerProviderStateMixin {
-  bool _isFront = true; // Track the current side (front/back)
-  late final AnimationController
-      _controller; // Use 'late' for non-null initialization
-  late final Animation<double>
-      _flipAnimation; // Declare flipAnimation as a class field
+    with SingleTickerProviderStateMixin {
+  bool isHovered = false;
+  late AnimationController _controller;
+  late Animation<double> _flipAnimation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500), // Adjust animation duration
+      duration: const Duration(milliseconds: 400),
     );
 
-    // Initialize _flipAnimation here after _controller is initialized
-    _flipAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    _flipAnimation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    ));
+  }
+
+  void _onHover(bool hovering) {
+    setState(() {
+      isHovered = hovering;
+      if (isHovered) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    });
   }
 
   @override
   void dispose() {
-    _controller.dispose(); // Dispose the controller when the widget is disposed
+    _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (event) {
-        setState(() {
-          _isFront = !_isFront;
-          _controller.forward();
-        });
-      },
-      onExit: (event) {
-        setState(() {
-          _isFront = !_isFront;
-          _controller.reverse();
-        });
-      },
+      onEnter: (_) => _onHover(true),
+      onExit: (_) => _onHover(false),
       child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) => Transform(
-          alignment: Alignment.center,
-          transform: Matrix4.identity()..rotateY(pi * _flipAnimation.value),
-          child: Container(
-            height: widget.height,
-            width: widget.width,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Theme.of(context).colorScheme.primary.withOpacity(0.4),
-                  Theme.of(context).colorScheme.primary.withOpacity(0.8),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
-                  blurRadius: 8,
-                  offset: const Offset(4, 4),
+        animation: _flipAnimation,
+        builder: (context, child) {
+          // Check if the flipAnimation is past halfway
+          bool isFront = _flipAnimation.value <= 0.5;
+
+          return Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.rotationY(
+                _flipAnimation.value * 3.14159), // pi radians for flipping
+            child: Container(
+              height: widget.height,
+              width: widget.width,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Theme.of(context).colorScheme.primary.withOpacity(0.2),
+                    Theme.of(context).colorScheme.primary.withOpacity(0.9),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                 ),
-              ],
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: _isFront
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        widget.icon,
-                        const SizedBox(height: 12),
-                        Text(
-                          widget.title,
-                          style: TextStyle(
-                            fontSize: widget.height * 0.1,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.tertiary,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 8,
+                    offset: const Offset(4, 4),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: isFront
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          widget.icon,
+                          const SizedBox(height: 12),
+                          Text(
+                            widget.title,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
+                        ],
+                      )
+                    : Transform(
+                        alignment: Alignment.center,
+                        transform: Matrix4.rotationY(
+                            3.14159), // Reverse the text's rotation
+                        child: Center(
+                          child: Text(
+                            widget.backText,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ],
-                    )
-                  : Transform(
-                      alignment: Alignment.center,
-                      transform:
-                          Matrix4.identity(), // No rotation for back text
-                      child: Text(
-                        widget.backText,
-                        style: TextStyle(
-                          fontSize: widget.height * 0.12,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                        textAlign: TextAlign.center,
                       ),
-                    ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
