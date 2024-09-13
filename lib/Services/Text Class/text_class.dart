@@ -12,8 +12,11 @@ class TextClass {
       "I am  a student of Air University. I am currently Studying Bachelors in Computer Science. The university has enabled me to understand different complex algorithms used in this field. My hard-work dedication and the efforts of my beloved teachers has enabled me to create an elegant design in coding universe. Not only my concepts related to different niche are clear also I have a motivation for building Attractive User interfaces with strong backend technologies. I hope to enhance it further more!";
 
   final String android =
-      'I have developed multiple android applications in flutter with some elegant user Interfaces and smooth and functional back-ends. My primary expertise are in Android development';
-  final String ios = '';
-  final String web = '';
-  final String desktop = '';
+      'I have developed multiple android applications in flutter with some elegant user Interfaces and smooth and functional back-ends. My primary expertise are in Android development all the projects are available on my GitHub and also displayed on LinkedIn.';
+  final String ios =
+      'I have developed multiple ios applications in flutter with some elegant user Interfaces and smooth and functional back-ends. I am a Cross Platform Developer and all the projects are available on my GitHub and also displayed on LinkedIn.';
+  final String web =
+      'I have developed some web applications in flutter with some elegant user Interfaces and smooth and functional back-ends like this portfolio. I am a Cross Platform Developer and all the projects are available on my GitHub and also displayed on LinkedIn.';
+  final String desktop =
+      'I have developed some desktop applications in flutter with some elegant user Interfaces and smooth and functional back-ends. I am a Cross Platform Developer and all the projects are available on my GitHub and also displayed on LinkedIn.';
 }

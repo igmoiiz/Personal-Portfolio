@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class OsContainer extends StatefulWidget {
@@ -59,6 +61,7 @@ class _OsContainerState extends State<OsContainer>
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return MouseRegion(
       onEnter: (_) => _onHover(true),
       onExit: (_) => _onHover(false),
@@ -120,11 +123,11 @@ class _OsContainerState extends State<OsContainer>
                           child: Text(
                             widget.backText,
                             style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontSize: height * 0.023,
+                              fontWeight: FontWeight.normal,
                               color: Theme.of(context).colorScheme.secondary,
                             ),
-                            textAlign: TextAlign.center,
+                            textAlign: TextAlign.justify,
                           ),
                         ),
                       ),

@@ -376,7 +376,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
               title: 'IOS',
-              backText: 'Hello',
+              backText: textClass.ios,
             ),
             OsContainer(
               height: height * 0.35,
@@ -387,7 +387,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
               title: 'Desktop',
-              backText: 'Hello',
+              backText: textClass.desktop,
             ),
             OsContainer(
               height: height * 0.35,
@@ -398,7 +398,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                 color: Theme.of(context).colorScheme.onPrimary,
               ),
               title: 'Website Application',
-              backText: 'Hello',
+              backText: textClass.web,
             ),
           ],
         ),
