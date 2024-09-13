@@ -1,50 +1,34 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_typing_uninitialized_variables, must_be_immutable
 
 import 'package:flutter/material.dart';
 
 class AboutContainer extends StatelessWidget {
   final text;
-  const AboutContainer({super.key, required this.text});
+  var child;
+  AboutContainer({super.key, required this.text, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Colors.blue.shade900,
+        gradient: LinearGradient(
+          colors: [
+            Theme.of(context).colorScheme.primary.withOpacity(0.2),
+            Theme.of(context).colorScheme.primary.withOpacity(0.9),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            offset: const Offset(2, 2),
-            blurRadius: 7,
-            spreadRadius: 3.5,
-            color: Colors.blue.shade900.withOpacity(0.3),
-          ),
-          BoxShadow(
-            offset: const Offset(-2, -2),
-            blurRadius: 7,
-            spreadRadius: 3.5,
-            color: Colors.blue.shade900.withOpacity(0.5),
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 8,
+            offset: const Offset(4, 4),
           ),
         ],
       ),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-            text,
-            overflow: TextOverflow.clip,
-            textAlign: TextAlign.justify,
-            style: const TextStyle(
-              color: Colors.white,
-              letterSpacing: .5,
-              fontSize: 18,
-            ),
-          ),
-        ),
-      ),
+      child: child,
     );
   }
 }

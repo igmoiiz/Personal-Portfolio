@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:e_portfolio/Components/about_container.dart';
 import 'package:e_portfolio/Components/os_container.dart';
 import 'package:e_portfolio/Services/Text%20Class/text_class.dart';
 import 'package:e_portfolio/Services/Utilities/utils.dart';
@@ -40,6 +41,14 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
 
   //  instance for text class
   final textClass = TextClass();
+
+  //  global key for form
+  final _formKey = GlobalKey<FormState>();
+
+  //  controllers for contacting
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -240,7 +249,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
         _aboutMe(height, width),
         SizedBox(height: height * 0.05),
         _offerStatus(height, width),
-        SizedBox(height: height * 0.05),
+        SizedBox(height: height * 0.1),
+        _contactMe(height, width),
       ],
     );
   }
@@ -406,7 +416,53 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
     );
   }
 
-  // ! What can I help you with?
+  // ! Let's Get in Touch..!
+  Widget _contactMe(var height, var width) {
+    return AboutContainer(
+      text: 'Let\'s Get in Touch..!',
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: width * 0.02, vertical: height * 0.02),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            AnimatedTextKit(
+              animatedTexts: [
+                FlickerAnimatedText(
+                  'What can I help you with?',
+                  textStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: .5,
+                    fontFamily: 'BaskervvilleSC',
+                    fontSize: height * 0.045,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: height * 0.05),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: nameController,
+                  ),
+                  TextFormField(
+                    controller: emailController,
+                  ),
+                  TextFormField(
+                    controller: messageController,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   // !  Projects showcase
 }
