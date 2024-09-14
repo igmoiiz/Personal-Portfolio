@@ -1,6 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:e_portfolio/Components/about_container.dart';
+import 'package:e_portfolio/Components/custom_button.dart';
+import 'package:e_portfolio/Components/long_field.dart';
 import 'package:e_portfolio/Components/os_container.dart';
+import 'package:e_portfolio/Components/text_field.dart';
 import 'package:e_portfolio/Services/Text%20Class/text_class.dart';
 import 'package:e_portfolio/Services/Utilities/utils.dart';
 import 'package:flutter/material.dart';
@@ -418,49 +421,93 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
 
   // ! Let's Get in Touch..!
   Widget _contactMe(var height, var width) {
-    return AboutContainer(
-      text: 'Let\'s Get in Touch..!',
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: width * 0.02, vertical: height * 0.02),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            AnimatedTextKit(
-              animatedTexts: [
-                FlickerAnimatedText(
-                  'What can I help you with?',
-                  textStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: .5,
-                    fontFamily: 'BaskervvilleSC',
-                    fontSize: height * 0.045,
-                    color: Theme.of(context).colorScheme.tertiary,
-                  ),
-                ),
-              ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AnimatedTextKit(
+          totalRepeatCount: 6,
+          animatedTexts: [
+            TyperAnimatedText(
+              'What can I help you with?',
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                letterSpacing: .5,
+                fontFamily: 'BaskervvilleSC',
+                fontSize: height * 0.045,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
             ),
-            SizedBox(height: height * 0.05),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: nameController,
-                  ),
-                  TextFormField(
-                    controller: emailController,
-                  ),
-                  TextFormField(
-                    controller: messageController,
-                  ),
-                ],
+            FlickerAnimatedText(
+              'What can I help you with?',
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                letterSpacing: .5,
+                fontFamily: 'BaskervvilleSC',
+                fontSize: height * 0.045,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
             ),
           ],
         ),
-      ),
+        SizedBox(height: height * 0.05),
+        AboutContainer(
+          text: 'Let\'s Get in Touch..!',
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: width * 0.02, vertical: height * 0.04),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: CustomFormField(
+                              controller: nameController,
+                              icon: Icons.person,
+                              hint: 'What\'s your Good Name?',
+                              inputType: TextInputType.name,
+                              validatorHint: 'Please Enter Your Name!',
+                            ),
+                          ),
+                          SizedBox(width: width * 0.03),
+                          Expanded(
+                            child: CustomFormField(
+                              controller: emailController,
+                              icon: Icons.alternate_email,
+                              hint: 'Enter your Email Address...',
+                              inputType: TextInputType.emailAddress,
+                              validatorHint: 'Please Enter Your Email Address!',
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: height * 0.04),
+                      LongFormField(
+                        controller: messageController,
+                        hint: 'What can I Help you with?',
+                        inputType: TextInputType.multiline,
+                        validatorHint: 'Please Let me know how can I help you?',
+                      ),
+                      SizedBox(height: height * 0.04),
+                      CustomButton(
+                        onTap: () {},
+                        text: 'Get in Touch',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
