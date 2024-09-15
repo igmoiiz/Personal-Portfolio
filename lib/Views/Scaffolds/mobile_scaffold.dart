@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:e_portfolio/Components/about_container.dart';
 import 'package:e_portfolio/Components/custom_button.dart';
@@ -48,10 +50,41 @@ class _MobileScaffoldState extends State<MobileScaffold>
   //  global key for form
   final _formKey = GlobalKey<FormState>();
 
+  //  loading variable
+  bool _isLoading = false;
+
   //  controllers for contacting
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
+
+  //  method for contact form
+  Future<void> sendEmail() async {
+    setState(() {
+      _isLoading = true;
+    });
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: 'moaiz3110@gmail.com.com', // Recipient's email
+      query: 'subject=Portfolio Inquiry&body=$messageController',
+    );
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri).then((value) {
+        setState(() {
+          _isLoading = false;
+        });
+        print('Email Sent Successfully!');
+      }).onError((error, stackTrace) {
+        setState(() {
+          _isLoading = false;
+        });
+        print('Error Sending Email: $error');
+      });
+    } else {
+      throw 'Could not launch $emailUri';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -541,9 +574,12 @@ class _MobileScaffoldState extends State<MobileScaffold>
                       ),
                       SizedBox(height: height * 0.02),
                       CustomButton(
+                        loading: _isLoading,
                         height: height * 0.08,
                         width: width * 0.00,
-                        onTap: () {},
+                        onTap: () {
+                          sendEmail();
+                        },
                         text: 'Get in Touch',
                       ),
                     ],

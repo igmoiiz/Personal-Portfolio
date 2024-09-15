@@ -7,12 +7,14 @@ class CustomButton extends StatelessWidget {
   String text;
   var height;
   var width;
+  bool loading;
   CustomButton({
     super.key,
     required this.onTap,
     required this.text,
     required this.height,
     required this.width,
+    required this.loading,
   });
 
   @override
@@ -28,13 +30,17 @@ class CustomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Center(
-            child: Text(
-              text,
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.tertiary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: loading
+                ? const CircularProgressIndicator(
+                    color: Colors.white,
+                  )
+                : Text(
+                    text,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
           ),
         ),
       ),

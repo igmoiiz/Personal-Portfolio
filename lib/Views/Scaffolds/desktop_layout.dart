@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:e_portfolio/Components/about_container.dart';
 import 'package:e_portfolio/Components/custom_button.dart';
@@ -48,8 +50,14 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
   //  global key for form
   final _formKey = GlobalKey<FormState>();
 
+  //  loading variable
+  bool _isLoading = false;
+
   //  function for sending email in contact us form
   Future<void> sendEmail() async {
+    setState(() {
+      _isLoading = true;
+    });
     final Uri emailUri = Uri(
       scheme: 'mailto',
       path: 'moaiz3110@gmail.com.com', // Recipient's email
@@ -57,7 +65,17 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
     );
 
     if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri);
+      await launchUrl(emailUri).then((value) {
+        setState(() {
+          _isLoading = false;
+        });
+        print('Email Sent Successfully!');
+      }).onError((error, stackTrace) {
+        setState(() {
+          _isLoading = false;
+        });
+        print('Error Sending Email: $error');
+      });
     } else {
       throw 'Could not launch $emailUri';
     }
@@ -539,6 +557,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                       ),
                       SizedBox(height: height * 0.04),
                       CustomButton(
+                        loading: _isLoading,
                         height: height * 0.1,
                         width: width * 0.3,
                         onTap: () {
