@@ -70,138 +70,169 @@ class _MobileScaffoldState extends State<MobileScaffold>
 
       // ! drawer
       drawer: Drawer(
-        child: Column(
-          children: [
-            DrawerHeader(
-              child: Image.asset(
-                'Assets/Icons/aot.png',
-                fit: BoxFit.contain,
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: height * 0.15,
               ),
-            ),
-            SizedBox(height: height * 0.1),
-            ListTile(
-              horizontalTitleGap: 20,
-              onTap: () async {
-                String url = 'https://github.com/igmoiiz';
-                if (await canLaunchUrl(Uri.parse(url))) {
-                  await launchUrl(Uri.parse(url));
-                } else {
-                  Utils().toastMessage(
-                      'Error Redirecting! Please Check your Connection\nand try again');
-                }
-              },
-              title: AnimatedTextKit(
-                animatedTexts: [
-                  TyperAnimatedText(
-                    'GitHub',
-                    textStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.tertiary,
+              Icon(
+                Icons.route_outlined,
+                color: Colors.white,
+                size: height * 0.07,
+              ),
+              SizedBox(height: height * 0.1),
+              ListTile(
+                horizontalTitleGap: 20,
+                onTap: () async {
+                  String url = 'https://github.com/igmoiiz';
+                  if (await canLaunchUrl(Uri.parse(url))) {
+                    await launchUrl(Uri.parse(url));
+                  } else {
+                    Utils().toastMessage(
+                        'Error Redirecting! Please Check your Connection\nand try again');
+                  }
+                },
+                title: AnimatedTextKit(
+                  animatedTexts: [
+                    TyperAnimatedText(
+                      'GitHub',
+                      textStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: .5,
+                        fontSize: height * 0.02,
+                      ),
+                    ),
+                  ],
+                ),
+                leading: Image.asset('Assets/Icons/github.png'),
+              ),
+              SizedBox(height: height * 0.04),
+              ListTile(
+                horizontalTitleGap: 20,
+                onTap: () async {
+                  String url =
+                      'https://www.linkedin.com/in/moaiz-baloch-a615392b4/';
+                  if (await canLaunchUrl(Uri.parse(url))) {
+                    await launchUrl(Uri.parse(url));
+                  } else {
+                    Utils().toastMessage(
+                        'Error Redirecting! Please Check your Connection\nand try again');
+                  }
+                },
+                title: AnimatedTextKit(
+                  animatedTexts: [
+                    TyperAnimatedText(
+                      'LinkedIn',
+                      textStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: .5,
+                        fontSize: height * 0.02,
+                      ),
+                    ),
+                  ],
+                ),
+                leading: Image.asset('Assets/Icons/linkedin.png'),
+              ),
+              SizedBox(height: height * 0.04),
+              ListTile(
+                horizontalTitleGap: 20,
+                onTap: () async {
+                  String url = 'https://www.instagram.com/ig_moiiz';
+                  if (await canLaunchUrl(Uri.parse(url))) {
+                    await launchUrl(Uri.parse(url));
+                  } else {
+                    Utils().toastMessage(
+                        'Error Redirecting! Please Check your Connection\nand try again');
+                  }
+                },
+                title: AnimatedTextKit(
+                  animatedTexts: [
+                    TyperAnimatedText(
+                      'Instagram',
+                      textStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: .5,
+                        fontSize: height * 0.02,
+                      ),
+                    ),
+                  ],
+                ),
+                leading: Image.asset('Assets/Icons/insta.png'),
+              ),
+              SizedBox(height: height * 0.04),
+              ListTile(
+                horizontalTitleGap: 20,
+                onTap: () async {
+                  String url = 'https://wa.me/message/A25K52AC26PTH1';
+                  if (await canLaunchUrl(Uri.parse(url))) {
+                    await launchUrl(Uri.parse(url));
+                  } else {
+                    Utils().toastMessage(
+                        'Error Redirecting! Please Check your Connection\nand try again');
+                  }
+                },
+                title: AnimatedTextKit(
+                  animatedTexts: [
+                    TyperAnimatedText(
+                      'Whatsapp',
+                      textStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: .5,
+                        fontSize: height * 0.02,
+                      ),
+                    ),
+                  ],
+                ),
+                leading: Image.asset('Assets/Icons/whatsapp.png'),
+              ),
+              const Spacer(),
+              Divider(
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Made in ',
+                    style: TextStyle(
+                      color: Colors.grey.shade300,
+                      letterSpacing: 1,
                       fontWeight: FontWeight.bold,
-                      letterSpacing: .5,
-                      fontSize: height * 0.02,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      String url = 'https://pub.dev';
+                      if (await canLaunchUrl(Uri.parse(url))) {
+                        await launchUrl(Uri.parse(url));
+                      } else {
+                        Utils().toastMessage(
+                            'Error Redirecting! Please Check your Connection\nand try again');
+                      }
+                    },
+                    child: Icon(
+                      Icons.favorite,
+                      color: Theme.of(context).colorScheme.tertiary,
+                    ),
+                  ),
+                  Text(
+                    ' with Flutter',
+                    style: TextStyle(
+                      color: Colors.grey.shade300,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
-              leading: Image.asset('Assets/Icons/github.png'),
-            ),
-            SizedBox(height: height * 0.04),
-            ListTile(
-              horizontalTitleGap: 20,
-              onTap: () async {
-                String url =
-                    'https://www.linkedin.com/in/moaiz-baloch-a615392b4/';
-                if (await canLaunchUrl(Uri.parse(url))) {
-                  await launchUrl(Uri.parse(url));
-                } else {
-                  Utils().toastMessage(
-                      'Error Redirecting! Please Check your Connection\nand try again');
-                }
-              },
-              title: AnimatedTextKit(
-                animatedTexts: [
-                  TyperAnimatedText(
-                    'LinkedIn',
-                    textStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.tertiary,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: .5,
-                      fontSize: height * 0.02,
-                    ),
-                  ),
-                ],
-              ),
-              leading: Image.asset('Assets/Icons/linkedin.png'),
-            ),
-            SizedBox(height: height * 0.04),
-            ListTile(
-              horizontalTitleGap: 20,
-              onTap: () async {
-                String url = 'https://www.instagram.com/ig_moiiz';
-                if (await canLaunchUrl(Uri.parse(url))) {
-                  await launchUrl(Uri.parse(url));
-                } else {
-                  Utils().toastMessage(
-                      'Error Redirecting! Please Check your Connection\nand try again');
-                }
-              },
-              title: AnimatedTextKit(
-                animatedTexts: [
-                  TyperAnimatedText(
-                    'Instagram',
-                    textStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.tertiary,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: .5,
-                      fontSize: height * 0.02,
-                    ),
-                  ),
-                ],
-              ),
-              leading: Image.asset('Assets/Icons/insta.png'),
-            ),
-            const Spacer(),
-            Divider(
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Made in ',
-                  style: TextStyle(
-                    color: Colors.grey.shade300,
-                    letterSpacing: 1,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                InkWell(
-                  onTap: () async {
-                    String url = 'https://pub.dev';
-                    if (await canLaunchUrl(Uri.parse(url))) {
-                      await launchUrl(Uri.parse(url));
-                    } else {
-                      Utils().toastMessage(
-                          'Error Redirecting! Please Check your Connection\nand try again');
-                    }
-                  },
-                  child: Icon(
-                    Icons.favorite,
-                    color: Theme.of(context).colorScheme.tertiary,
-                  ),
-                ),
-                Text(
-                  ' with Flutter',
-                  style: TextStyle(
-                    color: Colors.grey.shade300,
-                    letterSpacing: 1,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: height * 0.01),
-          ],
+              SizedBox(height: height * 0.01),
+            ],
+          ),
         ),
       ),
 
@@ -356,13 +387,13 @@ class _MobileScaffoldState extends State<MobileScaffold>
           totalRepeatCount: 3,
           animatedTexts: [
             TyperAnimatedText(
-              'Services I Offer..!',
+              'Platforms I Have Worked With..!',
               textStyle: TextStyle(
                 fontFamily: 'BaskervvilleSC',
                 color: Theme.of(context).colorScheme.tertiary,
                 letterSpacing: .5,
                 fontWeight: FontWeight.bold,
-                fontSize: height * 0.029,
+                fontSize: height * 0.027,
               ),
             ),
           ],

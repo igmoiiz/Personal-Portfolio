@@ -48,6 +48,21 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
   //  global key for form
   final _formKey = GlobalKey<FormState>();
 
+  //  function for sending email in contact us form
+  Future<void> sendEmail() async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: 'moaiz3110@gmail.com.com', // Recipient's email
+      query: 'subject=Portfolio Inquiry&body=$messageController',
+    );
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else {
+      throw 'Could not launch $emailUri';
+    }
+  }
+
   //  controllers for contacting
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
@@ -160,6 +175,33 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                 ],
               ),
               leading: Image.asset('Assets/Icons/insta.png'),
+            ),
+            SizedBox(height: height * 0.04),
+            ListTile(
+              horizontalTitleGap: 20,
+              onTap: () async {
+                String url = 'https://wa.me/message/A25K52AC26PTH1';
+                if (await canLaunchUrl(Uri.parse(url))) {
+                  await launchUrl(Uri.parse(url));
+                } else {
+                  Utils().toastMessage(
+                      'Error Redirecting! Please Check your Connection\nand try again');
+                }
+              },
+              title: AnimatedTextKit(
+                animatedTexts: [
+                  TyperAnimatedText(
+                    'Whatsapp',
+                    textStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: .5,
+                      fontSize: height * 0.02,
+                    ),
+                  ),
+                ],
+              ),
+              leading: Image.asset('Assets/Icons/whatsapp.png'),
             ),
             const Spacer(),
             Divider(
@@ -499,7 +541,9 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                       CustomButton(
                         height: height * 0.1,
                         width: width * 0.3,
-                        onTap: () {},
+                        onTap: () {
+                          sendEmail();
+                        },
                         text: 'Get in Touch',
                       ),
                     ],
