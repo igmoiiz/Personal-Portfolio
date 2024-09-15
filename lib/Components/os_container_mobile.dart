@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 
-class OsContainer extends StatefulWidget {
+class OsContainerMobile extends StatefulWidget {
   final double height;
   final double width;
   final Widget icon;
   final String title;
   final String backText; // Added backText for the flipped side
 
-  const OsContainer({
+  const OsContainerMobile({
     super.key,
     required this.height,
     required this.width,
@@ -22,9 +22,9 @@ class OsContainer extends StatefulWidget {
   _OsContainerMobileState createState() => _OsContainerMobileState();
 }
 
-class _OsContainerMobileState extends State<OsContainer>
+class _OsContainerMobileState extends State<OsContainerMobile>
     with SingleTickerProviderStateMixin {
-  bool isHovered = false;
+  bool isFlipped = false;
   late AnimationController _controller;
   late Animation<double> _flipAnimation;
 
@@ -42,10 +42,10 @@ class _OsContainerMobileState extends State<OsContainer>
     ));
   }
 
-  void _onHover(bool hovering) {
+  void _onTap() {
     setState(() {
-      isHovered = hovering;
-      if (isHovered) {
+      isFlipped = !isFlipped;
+      if (isFlipped) {
         _controller.forward();
       } else {
         _controller.reverse();
@@ -62,9 +62,8 @@ class _OsContainerMobileState extends State<OsContainer>
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return MouseRegion(
-      onEnter: (_) => _onHover(true),
-      onExit: (_) => _onHover(false),
+    return GestureDetector(
+      onTap: _onTap,
       child: AnimatedBuilder(
         animation: _flipAnimation,
         builder: (context, child) {

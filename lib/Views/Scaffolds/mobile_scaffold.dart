@@ -2,7 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:e_portfolio/Components/about_container.dart';
 import 'package:e_portfolio/Components/custom_button.dart';
 import 'package:e_portfolio/Components/long_field.dart';
-import 'package:e_portfolio/Components/os_container.dart';
+import 'package:e_portfolio/Components/os_container_mobile.dart';
 import 'package:e_portfolio/Components/text_field.dart';
 import 'package:e_portfolio/Services/Text%20Class/text_class.dart';
 import 'package:e_portfolio/Services/Utilities/utils.dart';
@@ -245,13 +245,13 @@ class _MobileScaffoldState extends State<MobileScaffold>
   Widget _buildUI(var height, var width) {
     return ListView(
       children: [
-        SizedBox(height: height * 0.08),
+        SizedBox(height: height * 0.04),
         _portfolioHeader(height, width),
         SizedBox(height: height * 0.03),
         _aboutMe(height, width),
-        SizedBox(height: height * 0.05),
+        SizedBox(height: height * 0.03),
         _offerStatus(height, width),
-        SizedBox(height: height * 0.1),
+        SizedBox(height: height * 0.02),
         _contactMe(height, width),
       ],
     );
@@ -307,7 +307,9 @@ class _MobileScaffoldState extends State<MobileScaffold>
             alignment: Alignment.center,
             child: Image.asset(
               'Assets/Images/my pic.png',
-              width: width * 0.4,
+              fit: BoxFit.cover,
+              width: width * 0.5,
+              height: height * 0.5,
             ),
           ),
         ),
@@ -369,7 +371,7 @@ class _MobileScaffoldState extends State<MobileScaffold>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            OsContainer(
+            OsContainerMobile(
               height: height * 0.25,
               width: width * 0.45,
               icon: Icon(
@@ -380,7 +382,7 @@ class _MobileScaffoldState extends State<MobileScaffold>
               title: 'Android',
               backText: textClass.android,
             ),
-            OsContainer(
+            OsContainerMobile(
               height: height * 0.25,
               width: width * 0.45,
               icon: Icon(
@@ -397,7 +399,7 @@ class _MobileScaffoldState extends State<MobileScaffold>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            OsContainer(
+            OsContainerMobile(
               height: height * 0.25,
               width: width * 0.45,
               icon: Icon(
@@ -408,7 +410,7 @@ class _MobileScaffoldState extends State<MobileScaffold>
               title: 'Desktop',
               backText: textClass.desktop,
             ),
-            OsContainer(
+            OsContainerMobile(
               height: height * 0.25,
               width: width * 0.45,
               icon: Icon(
