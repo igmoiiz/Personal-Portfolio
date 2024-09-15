@@ -1,26 +1,28 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   VoidCallback onTap;
   String text;
+  var height;
+  var width;
   CustomButton({
     super.key,
     required this.onTap,
     required this.text,
+    required this.height,
+    required this.width,
   });
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * 0.3),
+      padding: EdgeInsets.symmetric(horizontal: width),
       child: InkWell(
         onTap: onTap,
         child: Container(
-          height: height * 0.1,
+          height: height,
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
             borderRadius: BorderRadius.circular(8),

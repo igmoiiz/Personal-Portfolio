@@ -1,7 +1,7 @@
 import 'package:e_portfolio/Views/Responsive%20Layout/layout.dart';
 import 'package:e_portfolio/Views/Theme/theme.dart';
-import 'package:e_portfolio/Views/desktop_layout.dart';
-import 'package:e_portfolio/Views/mobile_scaffold.dart';
+import 'package:e_portfolio/Views/Scaffolds/desktop_layout.dart';
+import 'package:e_portfolio/Views/Scaffolds/mobile_scaffold.dart';
 import 'package:flutter/material.dart';
 
 void main() {

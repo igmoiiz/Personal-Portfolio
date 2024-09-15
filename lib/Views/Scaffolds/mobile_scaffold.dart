@@ -9,14 +9,14 @@ import 'package:e_portfolio/Services/Utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class DesktopScaffold extends StatefulWidget {
-  const DesktopScaffold({super.key});
+class MobileScaffold extends StatefulWidget {
+  const MobileScaffold({super.key});
 
   @override
-  State<DesktopScaffold> createState() => _DesktopScaffoldState();
+  State<MobileScaffold> createState() => _MobileScaffoldState();
 }
 
-class _DesktopScaffoldState extends State<DesktopScaffold>
+class _MobileScaffoldState extends State<MobileScaffold>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -65,7 +65,6 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
       // * app bar
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-        centerTitle: true,
         title: _appbarTitle(height),
       ),
 
@@ -222,7 +221,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
         FadeAnimatedText(
           'Welcome!',
           textStyle: TextStyle(
-            fontSize: height * 0.045,
+            fontSize: height * 0.035,
             fontFamily: 'BaskervvilleSC',
             letterSpacing: .5,
             color: Theme.of(context).colorScheme.tertiary,
@@ -234,7 +233,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
             color: Theme.of(context).colorScheme.tertiary,
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
-            fontSize: height * 0.035,
+            fontSize: height * 0.02,
             fontFamily: 'BaskervvilleSC',
           ),
         ),
@@ -267,7 +266,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
         TyperAnimatedText(
           'Hey! I\'m Moiz Baloch!',
           textStyle: TextStyle(
-            fontSize: height * 0.05,
+            fontSize: height * 0.025,
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
             color: Theme.of(context).colorScheme.tertiary,
@@ -277,7 +276,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
           'Your Go To Flutter Partner!',
           textStyle: TextStyle(
             fontFamily: 'BaskervvilleSC',
-            fontSize: height * 0.05,
+            fontSize: height * 0.025,
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
             color: Theme.of(context).colorScheme.tertiary,
@@ -307,7 +306,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
           child: Align(
             alignment: Alignment.center,
             child: Image.asset(
-              'assets/images/my pic.png',
+              'Assets/Images/my pic.png',
               width: width * 0.4,
             ),
           ),
@@ -315,29 +314,29 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
         Align(
           alignment: Alignment.topLeft,
           child: AnimatedTextKit(
+            totalRepeatCount: 2,
             animatedTexts: [
               TyperAnimatedText(
                 'Allow me to Introduce Myself..!',
                 textStyle: TextStyle(
                   fontFamily: 'BaskervvilleSC',
                   color: Theme.of(context).colorScheme.tertiary,
-                  letterSpacing: .5,
                   fontWeight: FontWeight.bold,
-                  fontSize: height * 0.05,
+                  fontSize: height * 0.03,
                 ),
               ),
             ],
           ),
         ),
-        SizedBox(height: height * 0.06),
+        SizedBox(height: height * 0.03),
         Text(
           textClass.aboutMe,
           textAlign: TextAlign.justify,
           style: TextStyle(
-            fontSize: height * 0.026,
+            fontSize: height * 0.019,
           ),
         ),
-        SizedBox(height: height * 0.08),
+        SizedBox(height: height * 0.02),
         Divider(
           color: Theme.of(context).colorScheme.primary,
         ),
@@ -352,6 +351,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         AnimatedTextKit(
+          totalRepeatCount: 3,
           animatedTexts: [
             TyperAnimatedText(
               'Services I Offer..!',
@@ -360,18 +360,18 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                 color: Theme.of(context).colorScheme.tertiary,
                 letterSpacing: .5,
                 fontWeight: FontWeight.bold,
-                fontSize: height * 0.05,
+                fontSize: height * 0.029,
               ),
             ),
           ],
         ),
-        SizedBox(height: height * 0.06),
+        SizedBox(height: height * 0.04),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             OsContainer(
-              height: height * 0.35,
-              width: width * 0.2,
+              height: height * 0.25,
+              width: width * 0.45,
               icon: Icon(
                 Icons.android_outlined,
                 size: height * 0.06,
@@ -381,8 +381,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
               backText: textClass.android,
             ),
             OsContainer(
-              height: height * 0.35,
-              width: width * 0.2,
+              height: height * 0.25,
+              width: width * 0.45,
               icon: Icon(
                 Icons.apple_outlined,
                 size: height * 0.06,
@@ -391,9 +391,15 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
               title: 'IOS',
               backText: textClass.ios,
             ),
+          ],
+        ),
+        SizedBox(height: height * 0.01),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
             OsContainer(
-              height: height * 0.35,
-              width: width * 0.2,
+              height: height * 0.25,
+              width: width * 0.45,
               icon: Icon(
                 Icons.desktop_mac_outlined,
                 size: height * 0.06,
@@ -403,8 +409,8 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
               backText: textClass.desktop,
             ),
             OsContainer(
-              height: height * 0.35,
-              width: width * 0.2,
+              height: height * 0.25,
+              width: width * 0.45,
               icon: Icon(
                 Icons.web_outlined,
                 size: height * 0.06,
@@ -414,6 +420,10 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
               backText: textClass.web,
             ),
           ],
+        ),
+        SizedBox(height: height * 0.05),
+        Divider(
+          color: Theme.of(context).colorScheme.primary,
         ),
       ],
     );
@@ -425,7 +435,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AnimatedTextKit(
-          totalRepeatCount: 6,
+          totalRepeatCount: 2,
           animatedTexts: [
             TyperAnimatedText(
               'What can I help you with?',
@@ -433,7 +443,7 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                 fontWeight: FontWeight.bold,
                 letterSpacing: .5,
                 fontFamily: 'BaskervvilleSC',
-                fontSize: height * 0.045,
+                fontSize: height * 0.025,
                 color: Theme.of(context).colorScheme.tertiary,
               ),
             ),
@@ -443,13 +453,23 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                 fontWeight: FontWeight.bold,
                 letterSpacing: .5,
                 fontFamily: 'BaskervvilleSC',
-                fontSize: height * 0.045,
+                fontSize: height * 0.025,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+            ),
+            TypewriterAnimatedText(
+              'What can I help you with?',
+              textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                letterSpacing: .5,
+                fontFamily: 'BaskervvilleSC',
+                fontSize: height * 0.025,
                 color: Theme.of(context).colorScheme.tertiary,
               ),
             ),
           ],
         ),
-        SizedBox(height: height * 0.05),
+        SizedBox(height: height * 0.02),
         AboutContainer(
           text: 'Let\'s Get in Touch..!',
           child: Padding(
@@ -464,39 +484,32 @@ class _DesktopScaffoldState extends State<DesktopScaffold>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: CustomFormField(
-                              controller: nameController,
-                              icon: Icons.person,
-                              hint: 'What\'s your Good Name?',
-                              inputType: TextInputType.name,
-                              validatorHint: 'Please Enter Your Name!',
-                            ),
-                          ),
-                          SizedBox(width: width * 0.03),
-                          Expanded(
-                            child: CustomFormField(
-                              controller: emailController,
-                              icon: Icons.alternate_email,
-                              hint: 'Enter your Email Address...',
-                              inputType: TextInputType.emailAddress,
-                              validatorHint: 'Please Enter Your Email Address!',
-                            ),
-                          ),
-                        ],
+                      CustomFormField(
+                        controller: nameController,
+                        icon: Icons.person,
+                        hint: 'What\'s your Good Name?',
+                        inputType: TextInputType.name,
+                        validatorHint: 'Please Enter Your Name!',
                       ),
-                      SizedBox(height: height * 0.04),
+                      SizedBox(height: height * 0.02),
+                      CustomFormField(
+                        controller: emailController,
+                        icon: Icons.alternate_email,
+                        hint: 'Enter your Email Address...',
+                        inputType: TextInputType.emailAddress,
+                        validatorHint: 'Please Enter Your Email Address!',
+                      ),
+                      SizedBox(height: height * 0.02),
                       LongFormField(
                         controller: messageController,
                         hint: 'What can I Help you with?',
                         inputType: TextInputType.multiline,
                         validatorHint: 'Please Let me know how can I help you?',
                       ),
-                      SizedBox(height: height * 0.04),
+                      SizedBox(height: height * 0.02),
                       CustomButton(
+                        height: height * 0.08,
+                        width: width * 0.00,
                         onTap: () {},
                         text: 'Get in Touch',
                       ),
